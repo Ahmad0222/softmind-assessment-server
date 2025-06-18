@@ -50,8 +50,8 @@ backend/
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/task-manager-backend.git
-cd task-manager-backend/backend
+git clone [https://github.com/your-username/task-manager-backend.git](https://github.com/Ahmad0222/softmind-assessment-server.git)
+cd softmind-assessment-server
 ```
 
 ### 2. Install dependencies
