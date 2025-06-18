@@ -50,7 +50,7 @@ backend/
 ### 1. Clone the repo
 
 ```bash
-git clone [https://github.com/your-username/task-manager-backend.git](https://github.com/Ahmad0222/softmind-assessment-server.git)
+git clone https://github.com/Ahmad0222/softmind-assessment-server.git
 cd softmind-assessment-server
 ```
 
@@ -66,8 +66,10 @@ Create a `.env` file in the root directory:
 
 ```env
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/task-manager
-ACCESS_TOKEN_SECRET=your_jwt_secret_key
+MONGODB_URI=mongodb://localhost:27017/taskManager
+ACCESS_TOKEN_SECRET=your_access_secret
+REFRESH_TOKEN_SECRET=your_refresh_secret
+UPLOAD_PATH=./uploads
 ```
 
 ---
