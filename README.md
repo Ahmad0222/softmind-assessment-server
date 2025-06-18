@@ -168,7 +168,7 @@ This project is licensed under the MIT License – you're free to use it for per
 
 **Ahmad Nawaz**  
 🔗 [Portfolio](https://ahmad-software-engineer.vercel.app)  
-📧 [Email](mailto:your-email@example.com)
+📧 [Email](mailto:ahmadnawaz02@outlook.com)
 
 ---
 
