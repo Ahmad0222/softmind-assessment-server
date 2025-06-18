@@ -36,7 +36,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/tasks', taskRoutes);
 
 // Test route
-app.get('/api/test', (req, res) => {
+app.get('/', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date() });
 });
 
