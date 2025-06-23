@@ -14,9 +14,7 @@ const licenseTypeSchema = new mongoose.Schema({
             city: String
         },
         timeline: {
-            type: String,
-            enum: ['annual_from_issue', 'fixed_calendar'],
-            default: 'annual_from_issue'
+            type: Date,
         }
     }],
     createdAt: {
