@@ -1,49 +1,51 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const connectDB = require('./config/db.js');
-const authRoutes = require('./routes/authRoutes.js');
-const userRoutes = require('./routes/userRoutes.js');
-const taskRoutes = require('./routes/taskRoutes.js');
-const errorHandler = require('./middleware/error.js');
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import connectDB from './config/db.js';
+import apiRoutes from './routes/api.js';
+import './config/reminderCron.js';
+import { notFound, errorHandler } from './middleware/errorHandler.js';
+import { login, register } from './controllers/authController.js';
+import { protect, admin } from './middleware/auth.js';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Connect to database
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Database Connection
 connectDB();
 
-// Security middleware
-app.use(helmet());
-app.use(cors());
-app.use(express.json({ limit: '10kb' }));
-
-// Rate limiting
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100,
-    message: 'Too many requests from this IP, please try again after 15 minutes'
-});
-app.use(limiter);
-
 // API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/tasks', taskRoutes);
+app.use('/api', apiRoutes);
+app.post('/api/auth/login', login);
+app.post('/api/auth/register', register);
 
-// Test route
+// Auth routes
+app.post('/api/auth/login', login);
+app.post('/api/auth/register', register);
+
+// Protected routes
+app.use('/api', protect); // Apply to all API routes
+
+// Admin-only routes
+app.post('/api/users', admin);
+app.post('/api/license-types', admin);
+app.put('/api/license-types/:id', admin);
+
+// Test endpoint
 app.get('/', (req, res) => {
-    res.json({ status: 'ok', timestamp: new Date() });
+    res.send('Renewal Tracker API is running...');
 });
 
-// Error handler
+// Error Handling
+app.use(notFound);
 app.use(errorHandler);
 
-// Start server
 app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+    console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
