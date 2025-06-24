@@ -11,20 +11,24 @@ const ClientSchema = new mongoose.Schema({
         required: true,
     },
 
-    // License details - now reference LicenseType
-    licenseType: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'LicenseType',
-        required: true,
-    },
-    renewalDate: {
-        type: Date,
-        required: true,
-    },
-    isOverdue: {
-        type: Boolean,
-        default: false,
-    },
+    licenses: [
+        {
+            licenseType: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'LicenseType',
+                required: true,
+            },
+            renewalDate: {
+                type: Date,
+                required: true,
+            },
+            jurisdiction: {
+                state: { type: String },
+                county: { type: String },
+                city: { type: String },
+            }
+        }
+    ],
 
     // Jurisdiction tracking
     jurisdiction: {

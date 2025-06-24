@@ -7,16 +7,12 @@ const licenseTypeSchema = new mongoose.Schema({
         unique: true
     },
     description: String,
-    renewalRules: [{
-        jurisdiction: {
-            state: String,
-            county: String,
-            city: String
-        },
-        timeline: {
-            type: Date,
-        }
-    }],
+    state: String,
+    county: String,
+    city: String,
+    timeline: {
+        type: Date,
+    },
     createdAt: {
         type: Date,
         default: Date.now

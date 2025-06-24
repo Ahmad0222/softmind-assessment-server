@@ -3,8 +3,7 @@ import LicenseType from '../models/LicenseType.js';
 // Create new license type
 export const createLicenseType = async (req, res) => {
     try {
-        const { name, description, renewalRules } = req.body;
-        const newLicenseType = await LicenseType.create({ name, description, renewalRules });
+        const newLicenseType = await LicenseType.create(req.body);
         res.status(201).json(newLicenseType);
     } catch (err) {
         res.status(400).json({ error: err.message });

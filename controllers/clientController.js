@@ -5,10 +5,10 @@ import LicenseType from '../models/LicenseType.js';
 export const createClient = async (req, res) => {
     try {
         // Validate license type
-        const licenseType = await LicenseType.findById(req.body.licenseType);
-        if (!licenseType) {
-            return res.status(400).json({ error: 'Invalid license type' });
-        }
+        // const licenseType = await LicenseType.findById(req.body.licenseType);
+        // if (!licenseType) {
+        //     return res.status(400).json({ error: 'Invalid license type' });
+        // }
 
         const newClient = await Client.create(req.body);
         res.status(201).json(newClient);
@@ -55,8 +55,8 @@ export const getClients = async (req, res) => {
 
         const clients = await Client.find(filter)
             .sort(sortOptions)
-            .populate('licenseType', 'name')
-            .populate('assignedTo', 'name email');
+            .populate('assignedTo', 'name email')
+            .populate('licenses.licenseType', 'name description');
 
         res.json(clients);
     } catch (err) {
