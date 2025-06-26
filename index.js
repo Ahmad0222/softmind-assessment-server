@@ -8,6 +8,14 @@ import { notFound, errorHandler } from './middleware/errorHandler.js';
 import { login, register } from './controllers/authController.js';
 import { protect, admin } from './middleware/auth.js';
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+
 dotenv.config();
 
 const app = express();
@@ -37,10 +45,20 @@ app.post('/api/users', admin);
 app.post('/api/license-types', admin);
 app.put('/api/license-types/:id', admin);
 
-// Test endpoint
+// Now you can safely use __dirname:
+app.use(notFound);
+app.use(errorHandler);
+
+// Static files and client routing - SHOULD BE LAST
+app.use(express.static(path.join(__dirname, 'Client/dist')));
+
+console.log('Static files served from:', path.join(__dirname, 'Client/dist'));
+
 app.get('/', (req, res) => {
-    res.send('Renewal Tracker API is running...');
+    res.sendFile(path.join(__dirname, 'Client/dist/index.html'));
 });
+
+
 
 // Error Handling
 app.use(notFound);

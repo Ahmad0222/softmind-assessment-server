@@ -29,12 +29,20 @@ const ClientSchema = new mongoose.Schema({
             }
         }
     ],
+    existingLicenses: {
+        type: [String], // Array of selected license/doc names
+        default: [],
+    },
+
+
+
 
     // Jurisdiction tracking
     jurisdiction: {
         state: String,
         county: String,
         city: String,
+        postalCode: String,
     },
 
     // Reminder tracking
@@ -65,6 +73,7 @@ const ClientSchema = new mongoose.Schema({
     businessName: {
         type: String,
     },
+
     ein: {
         type: String,
     },
