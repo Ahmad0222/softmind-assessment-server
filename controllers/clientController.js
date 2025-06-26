@@ -21,18 +21,18 @@ export const createClient = async (req, res) => {
 export const updateClient = async (req, res) => {
     try {
         // Validate license type if being updated
-        if (req.body.licenseType) {
-            const licenseType = await LicenseType.findById(req.body.licenseType);
-            if (!licenseType) {
-                return res.status(400).json({ error: 'Invalid license type' });
-            }
-        }
+        // if (req.body.licenseType) {
+        //     const licenseType = await LicenseType.findById(req.body.licenseType);
+        //     if (!licenseType) {
+        //         return res.status(400).json({ error: 'Invalid license type' });
+        //     }
+        // }
 
         const updatedClient = await Client.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true, runValidators: true }
-        ).populate('licenseType assignedTo', 'name email');
+        ).populate('assignedTo', 'name email').populate('licenses.licenseType', 'name description');
 
         res.json(updatedClient);
     } catch (err) {
