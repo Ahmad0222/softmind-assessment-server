@@ -53,11 +53,13 @@ export const getClients = async (req, res) => {
         const sortOptions = {};
         if (sort === 'renewalDate') sortOptions.renewalDate = 1;
 
-        const clients = await Client.find(filter)
+        let clients = await Client.find(filter)
             .sort(sortOptions)
             .populate('assignedTo', 'name email')
-            .populate('licenses.licenseType', 'name description').reverse()
+            .populate('licenses.licenseType', 'name description')
             .lean(); // Use lean for better performance
+
+        clients = clients.reverse();
 
         res.json(clients);
     } catch (err) {

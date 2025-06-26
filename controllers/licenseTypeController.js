@@ -13,7 +13,8 @@ export const createLicenseType = async (req, res) => {
 // Get all license types
 export const getLicenseTypes = async (req, res) => {
     try {
-        const licenseTypes = await LicenseType.find().reverse().lean();
+        let licenseTypes = await LicenseType.find().lean();
+        licenseTypes = licenseTypes.reverse(); // Reverse the order to show most recent first
         res.json(licenseTypes);
     } catch (err) {
         res.status(500).json({ error: err.message });
