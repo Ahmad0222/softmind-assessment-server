@@ -39,9 +39,7 @@ app.post('/api/users', admin);
 app.post('/api/license-types', admin);
 app.put('/api/license-types/:id', admin);
 
-// Error Handling - must come BEFORE static files
-app.use(notFound);
-app.use(errorHandler);
+
 
 // sendTestEmail(
 //     '99.ahmadnawaz@gmail.com',
@@ -56,6 +54,11 @@ app.use(express.static(path.join(__dirname, 'Client/dist')));
 app.get('/{*splat}', (req, res) => {
     res.sendFile(path.join(__dirname, 'Client/dist/index.html'));
 });
+
+
+// Error Handling - must come BEFORE static files
+app.use(notFound);
+app.use(errorHandler);
 
 
 app.listen(PORT, () => {
