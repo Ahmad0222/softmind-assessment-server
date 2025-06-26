@@ -73,7 +73,7 @@ export const getUsers = async (req, res) => {
         const users = await User.find().select('-password').populate({
             path: 'assignedClients',
             select: 'clientName renewalDate',
-        });
+        }).reverse().lean();
         res.json(users);
     } catch (err) {
         res.status(500).json({ error: err.message });

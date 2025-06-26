@@ -56,7 +56,8 @@ export const getClients = async (req, res) => {
         const clients = await Client.find(filter)
             .sort(sortOptions)
             .populate('assignedTo', 'name email')
-            .populate('licenses.licenseType', 'name description');
+            .populate('licenses.licenseType', 'name description').reverse()
+            .lean(); // Use lean for better performance
 
         res.json(clients);
     } catch (err) {

@@ -35,8 +35,6 @@ const ClientSchema = new mongoose.Schema({
     },
 
 
-
-
     // Jurisdiction tracking
     jurisdiction: {
         state: String,

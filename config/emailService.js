@@ -60,3 +60,20 @@ Immediate action required!
         if (error) console.error(`Overdue email failed for ${client.clientName}:`, error);
     });
 };
+
+
+export const sendTestEmail = async (to, subject, text) => {
+    const mailOptions = {
+        from: `"Test Email" <${process.env.EMAIL_FROM}>`,
+        to,
+        subject,
+        text,
+    };
+
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log(`Test email sent: ${info.response}`);
+    } catch (error) {
+        console.error('Error sending test email:', error);
+    }
+}

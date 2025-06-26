@@ -13,7 +13,7 @@ export const createLicenseType = async (req, res) => {
 // Get all license types
 export const getLicenseTypes = async (req, res) => {
     try {
-        const licenseTypes = await LicenseType.find();
+        const licenseTypes = await LicenseType.find().reverse().lean();
         res.json(licenseTypes);
     } catch (err) {
         res.status(500).json({ error: err.message });
