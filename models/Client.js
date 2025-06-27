@@ -81,6 +81,10 @@ const ClientSchema = new mongoose.Schema({
     notes: {
         type: String,
     },
+    isOverdue: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 export default mongoose.model('Client', ClientSchema);

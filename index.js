@@ -8,8 +8,6 @@ import { notFound, errorHandler } from './middleware/errorHandler.js';
 import { login, register } from './controllers/authController.js';
 import { protect, admin } from './middleware/auth.js';
 
-// import { sendTestEmail } from './config/emailService.js';
-
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { handleWebhook } from './controllers/webhookController.js';
@@ -42,14 +40,6 @@ app.use('/api', protect, apiRoutes);
 app.post('/api/users', admin);
 app.post('/api/license-types', admin);
 app.put('/api/license-types/:id', admin);
-
-
-
-// sendTestEmail(
-//     '99.ahmadnawaz@gmail.com',
-//     'Test Email from Renewal Tracker',
-//     'This is a test email sent from the Renewal Tracker application. If you received this'
-// );
 
 // Static files and client routing - LAST
 app.use(express.static(path.join(__dirname, 'Client/dist')));
