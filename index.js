@@ -12,6 +12,7 @@ import { protect, admin } from './middleware/auth.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { handleWebhook } from './controllers/webhookController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,6 +31,9 @@ connectDB();
 // Auth routes
 app.post('/api/auth/login', login);
 app.post('/api/auth/register', register);
+
+app.post('/api/webhooks/renewals', handleWebhook);
+
 
 // API routes with protection
 app.use('/api', protect, apiRoutes);

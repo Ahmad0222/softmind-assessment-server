@@ -8,12 +8,12 @@ export const handleWebhook = async (req, res) => {
         const payload = req.body;
 
         // Log the full payload
-        const logDir = path.resolve('/var/www/softmind-assessment-server/webhook_logs');
-        if (!fs.existsSync(logDir)) {
-            fs.mkdirSync(logDir, { recursive: true });
-        }
-        const logFile = path.join(logDir, `webhook_${Date.now()}.json`);
-        fs.writeFileSync(logFile, JSON.stringify(payload, null, 2));
+        // const logDir = path.resolve('/var/www/softmind-assessment-server/webhook_logs');
+        // if (!fs.existsSync(logDir)) {
+        //     fs.mkdirSync(logDir, { recursive: true });
+        // }
+        // const logFile = path.join(logDir, `webhook_${Date.now()}.json`);
+        // fs.writeFileSync(logFile, JSON.stringify(payload, null, 2));
 
         // Check renewal opt-in
         const renewalOptIn = payload["Have us handle renewals for you at 50% off your licensing price. Charged 1 month before renewal is due."];
