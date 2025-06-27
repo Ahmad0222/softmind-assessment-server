@@ -5,7 +5,7 @@ import connectDB from './config/db.js';
 import apiRoutes from './routes/api.js';
 import './config/reminderCron.js';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
-import { login, register } from './controllers/authController.js';
+import { forgotPassword, login, register, resetPassword } from './controllers/authController.js';
 import { protect, admin } from './middleware/auth.js';
 
 import path from 'path';
@@ -29,8 +29,11 @@ connectDB();
 // Auth routes
 app.post('/api/auth/login', login);
 app.post('/api/auth/register', register);
+app.post('/api/auth/forgot-password', forgotPassword);
+app.put('/api/auth/reset-password/:token', resetPassword);
 
 app.post('/api/webhooks/renewals', handleWebhook);
+// Add to your existing auth routes
 
 
 // API routes with protection

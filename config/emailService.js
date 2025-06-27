@@ -269,3 +269,25 @@ export const sendOverdueAlert = (client, license) => {
     });
 };
 
+
+// Add this to your existing emailService.js
+export const sendPasswordResetEmail = (email, token) => {
+    const resetLink = `${process.env.FRONTEND_URL}/reset-password/${token}`;
+
+    const mailOptions = {
+        from: `"Renewal Tracker" <${process.env.EMAIL_FROM}>`,
+        to: email,
+        subject: 'Password Reset Request',
+        html: `
+      <p>You requested a password reset for your Renewal Tracker account.</p>
+      <p>Click the link below to reset your password:</p>
+      <p><a href="${resetLink}">${resetLink}</a></p>
+      <p>This link will expire in 1 hour.</p>
+      <p>If you didn't request this, please ignore this email.</p>
+    `
+    };
+
+    transporter.sendMail(mailOptions, (error) => {
+        if (error) console.error(`Password reset email failed:`, error);
+    });
+};
