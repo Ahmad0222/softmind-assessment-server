@@ -4,7 +4,7 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import apiRoutes from './routes/api.js';
 import './config/reminderCron.js';
-import { notFound, errorHandler } from './middleware/errorHandler.js';
+// import { notFound, errorHandler } from './middleware/errorHandler.js';
 import { forgotPassword, login, register, resetPassword } from './controllers/authController.js';
 import { protect, admin } from './middleware/auth.js';
 
@@ -54,8 +54,8 @@ app.get('/{*splat}', (req, res) => {
 
 
 // Error Handling - must come BEFORE static files
-app.use(notFound);
-app.use(errorHandler);
+// app.use(notFound);
+// app.use(errorHandler);
 
 
 app.listen(PORT, () => {
